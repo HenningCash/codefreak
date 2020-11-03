@@ -1,9 +1,9 @@
 package org.codefreak.codefreak.service.evaluation
 
-import kotlin.reflect.KClass
-import kotlin.reflect.full.safeCast
 import org.codefreak.codefreak.entity.Answer
 import org.codefreak.codefreak.entity.Feedback
+import kotlin.reflect.KClass
+import kotlin.reflect.full.safeCast
 
 interface EvaluationRunner {
 
@@ -11,6 +11,9 @@ interface EvaluationRunner {
   fun getDefaultTitle() = getName()
   fun getDocumentationUrl(): String? = null
   fun run(answer: Answer, options: Map<String, Any>): List<Feedback>
+  fun stop(answer: Answer) {
+    println("Killing step ${getName()} of answer ${answer.id}")
+  }
 
   /**
    * Returns the schema of the options map that is passed to [run].

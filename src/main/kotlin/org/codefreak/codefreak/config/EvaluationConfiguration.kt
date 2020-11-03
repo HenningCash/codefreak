@@ -9,8 +9,10 @@ import org.codefreak.codefreak.service.evaluation.EvaluationQueue
 import org.codefreak.codefreak.service.evaluation.EvaluationWriter
 import org.springframework.batch.core.Job
 import org.springframework.batch.core.StepExecutionListener
+import org.springframework.batch.core.configuration.JobRegistry
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory
+import org.springframework.batch.core.configuration.support.JobRegistryBeanPostProcessor
 import org.springframework.batch.core.launch.JobLauncher
 import org.springframework.batch.core.launch.support.RunIdIncrementer
 import org.springframework.batch.core.launch.support.SimpleJobLauncher
@@ -20,6 +22,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.task.TaskExecutor
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor
+
 
 @Configuration
 class EvaluationConfiguration {
@@ -52,6 +55,13 @@ class EvaluationConfiguration {
     jobLauncher.setJobRepository(jobRepository)
     jobLauncher.afterPropertiesSet()
     return jobLauncher
+  }
+
+  @Bean
+  fun jobRegistryBeanPostProcessor(jobRegistry: JobRegistry): JobRegistryBeanPostProcessor {
+    val jobRegistryBeanPostProcessor = JobRegistryBeanPostProcessor()
+    jobRegistryBeanPostProcessor.setJobRegistry(jobRegistry)
+    return jobRegistryBeanPostProcessor
   }
 
   @Bean

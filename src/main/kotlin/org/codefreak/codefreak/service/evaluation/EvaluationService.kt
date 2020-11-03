@@ -148,7 +148,7 @@ class EvaluationService : BaseService() {
 
     // either take existing comments step on evaluation or create a new one
     val evaluationStep = evaluation.evaluationSteps.find { it.definition == stepDefinition }
-        ?: EvaluationStep(stepDefinition).also { evaluation.addStep(it) }
+        ?: EvaluationStep(stepDefinition, evaluation).also { evaluation.addStep(it) }
 
     evaluationStep.addFeedback(feedback)
     evaluationRepository.save(evaluation)

@@ -41,3 +41,6 @@ databaseChangeLog:
 - include:
       file: changelogs/20201009114158-configurable-ide.yaml
       relativeToChangelogFile: true
+- include:
+    file: changelogs/20201103152656-evaluation-step-timeout.yaml
+    relativeToChangelogFile: true
